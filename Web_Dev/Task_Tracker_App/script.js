@@ -1,36 +1,61 @@
-// script.js 
 // Section 1: TODOs
 // TODO: Register submissions from the user on the form.
-// TODO: Determine the value of the data submitted and add it to a JavaScript array call
+// TODO: Determine the value of the data submitted and add it to a JavaScript array called tasks.
 // TODO: Call the render function to update the table with the new tasks.
+
 // Section 2: App State Variables
-let tasks =[];
+let tasks = [];
+
 // Section 3: Cached Element References 
-const taskForm = null;
-const taskTable = null;
+let taskForm = null;
+let taskTable = null;
+
 document.addEventListener("DOMContentLoaded", function() {
     taskForm = document.getElementById("taskForm");
     taskTable = document.getElementById("taskTable");
 });
-// Function to handle form submissions function handleSubmission(event) {
+
+// Function to handle form submissions 
+function handleSubmission(event) {
     event.preventDefault();
     // TODO: Get form input values
-    const form = document.getElementById('form').value;
+    const taskName = document.getElementById('taskName').value;
+    const taskDescription = document.getElementById('taskDescription').value;
+    const taskDeadline = document.getElementById('taskDeadline').value;
+
     // TODO: Validate input fields
-    alert('Task name and deadline are required!');
+    if (!taskName || !taskDeadline) {
+        alert('Task name and deadline are required!');
+        return;
+    }
 
     // TODO: Update the tasks array
-    taskForm.push({name:  taskName, description: taskDescription, deadline: taskDeadline})
+    tasks.push({ name: taskName, description: taskDescription, deadline: taskDeadline });
     render();
+}
 
 // Function to render tasks in the table
-function render() {
-    // TODO: Use array methods to create a new table row of data for each item in the ar
-    taskTable.innerHTML = task.map(task=> 
-        <tr>
-        <td>${task.name}</td>
-        <td>${task.description}</td>
-        <td>${task.deadline}</td>
-        <td><button onclick="marktaskComplete(this)">Complete</button></td>
-        <td><button onclick="removeTask(this)">Remove</button></td>
-        </tr>).join('');}
+    function render() {
+        // TODO: Use array methods to create a new table row of data for each item in the ar
+        taskTable.innerHTML = task.map(task=> 
+            <tr>
+            <td>${task.name}</td>
+            <td>${task.description}</td>
+            <td>${task.deadline}</td>
+            <td><button onclick="marktaskComplete(this)">Complete</button></td>
+            <td><button onclick="removeTask(this)">Remove</button></td>
+            </tr>).join('');
+            }
+
+// Function to initialize the table
+function init() {
+    taskTable.innerHTML = ''; // Clear the table
+    tasks = []; // Reset the tasks array
+    render(); // Call the render function
+}
+
+// Event listener for form submission 
+taskForm.addEventListener('submit', handleSubmission);
+
+// Call the init function to set up the initial state of the app
+init();
