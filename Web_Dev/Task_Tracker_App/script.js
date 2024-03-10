@@ -12,21 +12,25 @@ document.addEventListener("DOMContentLoaded", function() {
     taskForm = document.getElementById("taskForm");
     taskTable = document.getElementById("taskTable");
 });
-// Function to handle form submissions
-function handleSubmission(event) {
+// Function to handle form submissions function handleSubmission(event) {
     event.preventDefault();
     // TODO: Get form input values
+    const form = document.getElementById('form').value;
     // TODO: Validate input fields
+    alert('Task name and deadline are required!');
+
     // TODO: Update the tasks array
+    taskForm.push({name:  taskName, description: taskDescription, deadline: taskDeadline})
     render();
-} 
+
 // Function to render tasks in the table
 function render() {
     // TODO: Use array methods to create a new table row of data for each item in the ar
-} 
-// Function to initialize the table
-function init() {
-    taskTable.innerHTML = ''; // Clear the table
-    tasks = []; // Reset the tasks array
-    render(); // Call the render function
-} 
+    taskTable.innerHTML = task.map(task=> 
+        <tr>
+        <td>${task.name}</td>
+        <td>${task.description}</td>
+        <td>${task.deadline}</td>
+        <td><button onclick="marktaskComplete(this)">Complete</button></td>
+        <td><button onclick="removeTask(this)">Remove</button></td>
+        </tr>).join('');}
