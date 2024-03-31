@@ -7,7 +7,10 @@ return(
 <p>This is a test post we'll edit later!</p>
 <p>Likes: 30</p>
 <p>Comments:</p>
+<Comment />
+<Comment />
+<Comment />
 </div>
 )
 }
-export default Post
+export default Post 
