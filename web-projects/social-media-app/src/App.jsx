@@ -1,19 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import React from 'react';
-import Post from './components/Post';
-function App(){
-return(
-<div>
-<h1>Fakebook!</h1>
-{/* CreatePostForm */}
-{/* Feed */}
-{/* Post */}
-<Post content="This is a test post!" />
-<Post content="This is another test post!" />
-</div>
-)
+import React, { useState } from 'react';
+import CreatePostForm from './components/CreatePostForm';
+import Feed from './components/Feed';
+
+function App() {
+  const [posts, setPosts] = useState([]);
+
+  const addPost = (newPost) => {
+    setPosts([...posts, newPost]);
+  };
+
+  return (
+    <div>
+      <h1>Fakebook!</h1>
+      <CreatePostForm addPost={addPost} />
+      <Feed posts={posts} />
+    </div>
+  );
 }
-export default App
+
+export default App;
