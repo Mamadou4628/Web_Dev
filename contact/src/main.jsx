@@ -1,16 +1,12 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import Root, { loader as rootLoader, action as rootAction, } from "./routes/root";
+import Root, { loader as rootLoader, action as rootAction } from "./routes/root";
 import ErrorPage from "./error-page";
-import Contact, { loader as contactLoader, 
-                  loader as contactAction, } from "./routes/contact";
-import EditContact, { action as editAction, } from "./routes/edit";
-import { action as destroyAction, } from "./routes/destroy";
+import Contact, { loader as contactLoader, action as contactAction } from "./routes/contact";
+import EditContact, { action as editAction } from "./routes/edit";
+import DestroyContact, { action as destroyAction } from "./routes/destroy";
 import Index from "./routes/index";
 
 const router = createBrowserRouter([
@@ -20,13 +16,13 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     loader: rootLoader,
     action: rootAction,
-    errorElement: <ErrorPage/>,},
     children: [
-
-      {errorElement: <ErrorPage/>,
-      children:[{
-        index: true, element: <Index />},
-       { path: "contacts/:contactId",
+      {
+        index: true,
+        element: <Index />
+      },
+      {
+        path: "contacts/:contactId",
         element: <Contact />,
         loader: contactLoader,
         action: contactAction,
@@ -35,16 +31,16 @@ const router = createBrowserRouter([
             path: "edit",
             element: <EditContact />,
             loader: contactLoader,
-            action: editAction,
-          },{
-            path: "contacts/:contactId/destroy",
-            action: destroyAction,
-            errorElement: <div>Oops! There was an error.</div>,
+            action: editAction
           },
+          {
+            path: "destroy",
+            action: destroyAction
+          }
         ]
-      },
-    ],
-  },
+      }
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
